@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {Schema} = mongoose
 
 const userSchema = new Schema({
     name: {
@@ -14,8 +15,8 @@ const userSchema = new Schema({
         required: true
     },
     date: {
-        type: date,
-        required: true
+        type: Date,
+        default: Date.now
     },
 });
 
