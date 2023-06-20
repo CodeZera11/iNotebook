@@ -30,10 +30,10 @@ router.post('/addnote', fetchuser ,[
             return res.status(400).json({ errors: errors.array() });
         }
 
-    let {title, description, tags} = req.body;
+    let {title, description, tag} = req.body;
 
     const note = new Note({
-        title, description, tags, user: req.user.id
+        title, description, tag, user: req.user.id
     })
 
     const savednote = await note.save();
@@ -44,8 +44,62 @@ router.post('/addnote', fetchuser ,[
         res.status(500).json({error: "Internal Error"})
     }
 
+});
+
+// Route-3: Updating a existing note using: PUT '/api/notes/updatenote'. Login Required
+router.put('/updatenote/:id', fetchuser, async(req,res)=>{
+
+    try {
+        let {title, description, tag} = req.body;
+
+    let newNote = {};
+
+    if(title){newNote.title = title};
+    if(description){newNote.description = description};
+    if(tag){newNote.tag = tag};
+
+    let note = await Note.findById(req.params.id);
+
+    if(!note){
+        res.status(404).send("Not Found!!!!!!");
+    }
+
+    if(note.user.toString() !== req.params.id){
+        return res.status(401).send("Not Allowed!!!1")
+    }
+
+    note = await Note.findByIdAndUpdate(req.params.id, {$set: newNote}, {new: true})
+
+    res.json(note)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Internal Error"})
+    }
     
-    
+});
+
+// Route-4: Deleting a existing note using: DELETE '/api/notes/updatenote'. Login Required
+router.delete('/deletenote/:id', fetchuser, async (req,res)=>{
+
+    try {
+        let note = await Note.findById(req.params.id);
+
+        if(!note){
+            res.status(404).send("Not Found!!");
+        }
+        
+        if(note.user.toString() !== req.user.id){
+            return res.status(400).send("Not allowed");
+        }
+
+        note = await Note.findByIdAndDelete(req.params.id)
+
+        return res.status(200).send("Note deleted successfully")
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: "Internal Error"})
+    }
 
 });
 
