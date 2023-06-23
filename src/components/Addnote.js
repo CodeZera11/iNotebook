@@ -39,7 +39,7 @@ const Addnote = () => {
           <input type="text" className="form-control" id="tag" name="tag" onChange={onChange}/>
         </div>
         
-        <button type="submit" className="btn btn-primary" onClick={handleClick}> Add Note </button>
+        <button disabled={note.title.length<5 || note.description.length<5} type="submit" className="btn btn-primary" onClick={handleClick}> Add Note </button>
       </form>
     </div>
   )

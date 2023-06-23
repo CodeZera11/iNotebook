@@ -14,7 +14,6 @@ router.get('/fetchallnotes', fetchuser ,async(req,res)=>{
         console.log(error);
         res.status(500).json({error: "Internal Error"})
     }
-   
 });
 
 // Route-2: Adding a note using: POST '/api/notes/addnote'. Login Required
@@ -52,25 +51,25 @@ router.put('/updatenote/:id', fetchuser, async(req,res)=>{
     try {
         let {title, description, tag} = req.body;
 
-    let newNote = {};
+        let newNote = {};
 
-    if(title){newNote.title = title};
-    if(description){newNote.description = description};
-    if(tag){newNote.tag = tag};
+        if(title){newNote.title = title};
+        if(description){newNote.description = description};
+        if(tag){newNote.tag = tag};
 
-    let note = await Note.findById(req.params.id);
+        let note = await Note.findById(req.params.id);
 
-    if(!note){
-        res.status(404).send("Not Found!!!!!!");
-    }
+        if(!note){
+            res.status(404).send("Not Found!!!!!!");
+        }
 
-    if(note.user.toString() !== req.params.id){
-        return res.status(401).send("Not Allowed!!!1")
-    }
+        if(note.user.toString() !== req.user.id){
+            return res.status(401).send("Not Allowed!!!")
+        }
 
-    note = await Note.findByIdAndUpdate(req.params.id, {$set: newNote}, {new: true})
+        note = await Note.findByIdAndUpdate(req.params.id, {$set: newNote}, {new: true})
 
-    res.json(note)
+        res.json(note)
     } catch (error) {
         console.log(error);
         res.status(500).json({error: "Internal Error"})
@@ -83,11 +82,11 @@ router.delete('/deletenote/:id', fetchuser, async (req,res)=>{
 
     try {
         let note = await Note.findById(req.params.id);
-
+        // console.log(note)
         if(!note){
-            res.status(404).send("Not Found!!");
+            return res.status(404).send("Not Found!!");
         }
-        
+    
         if(note.user.toString() !== req.user.id){
             return res.status(400).send("Not allowed");
         }
