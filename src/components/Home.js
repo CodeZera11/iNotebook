@@ -3,11 +3,11 @@ import Notes from "./Notes";
 import Addnote from "./Addnote";
 
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
-    <Addnote/>
-    <Notes/>
+    <Addnote showAlert={props.showAlert}/>
+    <Notes showAlert={props.showAlert}/>
       
     </div>
 
