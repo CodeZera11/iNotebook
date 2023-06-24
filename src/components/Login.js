@@ -50,7 +50,7 @@ const Login = () => {
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" value={credentials.password} onChange={onChange} className="form-control" name="password" id="password"/>
                 </div>
-                <button disabled={credentials.email.length===0 || credentials.password.length < 0} type="submit" className="btn btn-primary">Submit</button>
+                <button disabled={credentials.email.length===0 || credentials.password.length < 0} type="submit" className="btn btn-primary">Login</button>
             </form>
         </div>
     )
