@@ -3,9 +3,9 @@ import noteContext from "./noteContext";
 
 const NoteState = (props)=>{
 
-    const host = "http://localhost:8000"
+    const host = "http://localhost:8000";
 
-    const n1 = []
+    const n1 = [];
 
     const [notes, setNotes] = useState(n1);
 
@@ -56,9 +56,9 @@ const NoteState = (props)=>{
         });   
         
         const json = await response.json();
-        console.log(json)
+        // console.log(json)
 
-        console.log("Deleting note with id " + id)
+        // console.log("Deleting note with id " + id)
     }
 
     // Edit a note
