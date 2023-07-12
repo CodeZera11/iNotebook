@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const mongoURI = "mongodb://localhost:27017/iNotebook"
+const mongoURI = "mongodb+srv://admin:admin@inotebook.2nlrgxk.mongodb.net/?retryWrites=true&w=majority"
 
 const connectToMongo = async ()=>{
     await mongoose.connect(mongoURI)
@@ -8,3 +8,6 @@ const connectToMongo = async ()=>{
 }
 
 module.exports =  connectToMongo;
+
+
+// mongodb+srv://bhavesh:bhavesh12345@cluster0.ck26fwh.mongodb.net/?retryWrites=true&w=majority

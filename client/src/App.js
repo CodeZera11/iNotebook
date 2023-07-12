@@ -28,6 +28,11 @@ function App() {
     },2000)
   }
 
+  
+
+  const key = process.env.REACT_APP_URL
+  console.log(key)
+
   return (
     <>
     <NoteState>

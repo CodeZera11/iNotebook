@@ -3,7 +3,7 @@ import noteContext from "./noteContext";
 
 const NoteState = (props)=>{
 
-    const host = "http://localhost:8000";
+    const host = process.env.REACT_APP_BASE_URL
 
     const n1 = [];
 
@@ -47,7 +47,7 @@ const NoteState = (props)=>{
         setNotes(newNotes);
 
         // API Call
-        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+         await fetch(`${host}/api/notes/deletenote/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -55,7 +55,6 @@ const NoteState = (props)=>{
           }
         });   
         
-        const json = await response.json();
         // console.log(json)
 
         // console.log("Deleting note with id " + id)

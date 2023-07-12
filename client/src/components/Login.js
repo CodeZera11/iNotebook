@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
-
+    const BASE_URL = process.env.REACT_APP_BASE_URL
     const [credentials, setCredentials] = useState({email: "", password: ""});
     const navigate = useNavigate();
 
@@ -11,7 +11,7 @@ const Login = (props) => {
         // console.log(credentials)
 
     // API call
-        const response = await fetch(`http://localhost:8000/api/auth/login`, {
+        const response = await fetch(`${BASE_URL}/api/auth/login`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

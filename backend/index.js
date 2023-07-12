@@ -3,18 +3,21 @@ const express = require('express');
 const router_auth = require('./routes/auth')
 const router_notes = require('./routes/notes')
 var cors = require('cors')
+var dotenv = require('dotenv')
 
 
+dotenv.config()
 var app = express()
 app.use(cors())
-connectToMongo();
-const port = 8000
+
+const port = 10000
 
 app.use(express.json());
 
 app.use('/api/auth', router_auth)
 app.use('/api/notes', router_notes)
 
-app.listen(port, () => {
+app.listen(port, async() => {
+  await connectToMongo()
   console.log(`iNotebook backend listening on port http://localhost:${port}`)
 })
